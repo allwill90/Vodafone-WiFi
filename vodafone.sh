@@ -1,8 +1,12 @@
 #!/bin/bash
-
+#your login username
 USERNAME=""
+#your login password
 PASSWORD=""
-DIR="/etc/scripts/"
+#the directory where you have saved the script starting from the root and with an ending slash e.g /etc/scripts/
+DIR=""
+#the logname you wish to assign to the script when getting log messages
+LOGNAME=""
 
 wget --server-response --append-output=$DIR'vodafone.txt' -qO/dev/null 'http://www.google.it/'
 
@@ -11,8 +15,8 @@ if test -f $DIR'vodafone.txt';then
 	REFRESH=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d= -f2 | cut -d\& -f1)
 
 else
-	#below line is for logging on openwrt, change it according to your system and needs.
-	logger -p info -t "$DIR$(basename $BASH_SOURCE)" "wget failed to create file $DIRvodafone.txt"
+
+	logger -p info -t "$DIR$LOGNAME" "wget failed to create file $DIRvodafone.txt"
 
 fi
 
@@ -35,8 +39,7 @@ if [ "$REFRESH" = "notyet" ];then
 
 		if  ! -f $DIR'cookies.txt';then
 
-			#below line is for logging on openwrt, change it according to your system and needs.
-			logger -p info -t "$DIR$(basename $BASH_SOURCE)" "wget failed to create file $DIRcookies.txt"
+			logger -p info -t "$DIR$LOGNAME" "wget failed to create file $DIRcookies.txt"
 		
 		fi
 
@@ -48,27 +51,23 @@ if [ "$REFRESH" = "notyet" ];then
 
 		if [ "$SUCCESS" = "success" ];then
 
-			#below line is for logging on openwrt, change it according to your system and needs.
-			logger -p info -t "$DIR$(basename $BASH_SOURCE)" "login successfull"
+			logger -p info -t "$DIR$LOGNAME" "login successfull"
 			
 		else
 
-			#below line is for logging on openwrt, change it according to your system and needs.
-			logger -p info -t "$DIR$(basename $BASH_SOURCE)" "login failed"
+			logger -p info -t "$DIR$LOGNAME" "login failed"
 
 		fi
 	
 	else
 		
-		#below line is for logging on openwrt, change it according to your system and needs.
-		logger -p info -t "$DIR$(basename $BASH_SOURCE)" "wget failed to create file $DIRvodafone2.txt"
+		logger -p info -t "$DIR$LOGNAME" "wget failed to create file $DIRvodafone2.txt"
 
 	fi
 
 else
 	
-	#below line is for logging on openwrt, change it according to your system and needs.
-	logger -p info -t "$DIR$(basename $BASH_SOURCE)" "connection still alive"
+	logger -p info -t "$DIR$LOGNAME" "connection still alive"
 
 fi
 
