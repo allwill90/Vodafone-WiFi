@@ -16,6 +16,7 @@ if test -f $DIR'vodafone.txt';then
 
 else
 
+	#below line is for logging on openwrt, change it according to your system and needs.
 	logger -p info -t "$DIR$LOGNAME" "wget failed to create file $DIRvodafone.txt"
 
 fi
@@ -39,6 +40,7 @@ if [ "$REFRESH" = "notyet" ];then
 
 		if  ! -f $DIR'cookies.txt';then
 
+			#below line is for logging on openwrt, change it according to your system and needs.
 			logger -p info -t "$DIR$LOGNAME" "wget failed to create file $DIRcookies.txt"
 		
 		fi
@@ -51,22 +53,26 @@ if [ "$REFRESH" = "notyet" ];then
 
 		if [ "$SUCCESS" = "success" ];then
 
+			#below line is for logging on openwrt, change it according to your system and needs.
 			logger -p info -t "$DIR$LOGNAME" "login successfull"
 			
 		else
 
+			#below line is for logging on openwrt, change it according to your system and needs.
 			logger -p info -t "$DIR$LOGNAME" "login failed"
 
 		fi
 	
 	else
 		
+		#below line is for logging on openwrt, change it according to your system and needs.
 		logger -p info -t "$DIR$LOGNAME" "wget failed to create file $DIRvodafone2.txt"
 
 	fi
 
 else
 	
+	#below line is for logging on openwrt, change it according to your system and needs.
 	logger -p info -t "$DIR$LOGNAME" "connection still alive"
 
 fi
