@@ -25,10 +25,10 @@ if [ "$REFRESH" = "notyet" ];then
 
 	UAMIP=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d\& -f2)
 	UAMPORT=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d\& -f3)
-	CHALLENGE=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d\& -f4)
-	MAC=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d\& -f5)
-	IP=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d\& -f6)
-	NASID=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d\& -f7)
+	NASID=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d\& -f4)
+	CHALLENGE=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d\& -f5)
+	MAC=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d\& -f6)
+	IP=$(cat $DIR'vodafone.txt' | grep "Location: https://it.portal.vodafone-wifi.com/jcp/it?res=notyet" | cut -d\& -f7)
 	
 	if test -f $DIR'cookies.txt';then
 
@@ -72,8 +72,16 @@ if [ "$REFRESH" = "notyet" ];then
 
 else
 	
-	#below line is for logging on openwrt, change it according to your system and needs.
-	logger -p info -t "$DIR$LOGNAME" "connection still alive"
+	 if [ "$REFRESH" = "" ];then
+        
+        #below line is for logging on openwrt, change it according to your system and needs.   
+		logger -p info -t "$DIR$LOGNAME" "general error, check your wireless connectivity and/or dns settings"
+    
+    else    
+        #below line is for logging on openwrt, change it according to your system and needs.
+	    logger -p info -t "$DIR$LOGNAME" "wget failed to create file $DIRvodafone2.txt"
+    
+    fi
 
 fi
 
