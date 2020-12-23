@@ -7,3 +7,5 @@ The prerequisites to use this are:
 
 Then you just need to set the parameters in the script (username and password must be url encoded, you can use any tool you like or use [this](https://www.urlencoder.org/) website.
 This was written on Arch linux and tested on Arch, Ubuntu and openwrt 18.06.x to 19.07.5.
+
+Note: if you want a completely automated connection manager based on this (like running it on the router) you need to setup the proper scripts at boot (in openwrt for example you could place a script in /etc/hotplug.d/net/99-something where you run the script when your desired interface goes up) and setup a cron job every 5 minutes (which is the lease time the Vodafone Station gives every dhcp client).
